@@ -1,0 +1,127 @@
+body {
+  margin: 0px !important;
+}
+
+#bg {
+  background-color: #2864FF;
+  position: fixed; 
+  width: 200%; 
+  height: 200%;
+  overflow: hidden;
+}
+#bg img {
+ position: fixed;
+    width: 1900px;
+    margin: 0 auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+}
+#lockup {
+	margin: auto;
+	position: relative;
+	width: 55vh;
+	top: 5%;
+}
+#container {
+  margin: 0 auto;
+
+}
+#container {
+  padding: 45px;
+  text-align: center;
+  font-family: poppins; 
+  font-size: 18px;
+  color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+#success {
+  font-size: 25px;
+  color: white;
+  margin: 0 auto;
+  font-family: poppins;
+  text-align: center;
+}
+
+
+
+.modal-form{
+  display: flex;
+  flex-direction: column;
+  max-width: 550px;
+  width: 100%;
+}
+.modal-form label{
+  padding: 30px 0 20px 0;
+  font-size: 18px;
+}
+.modal-form input{
+  padding:15px;
+  border-radius: 6px;
+  font-size: 18px;
+  max-height: 55px;
+  height: 100%;
+  border: 1px solid #979797;
+  margin: 10px 0;
+}
+.button-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+}
+.disabled{
+  background-color: #ececec !important;
+  color: black !important;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+.button-div a{
+  font-family: poppins;
+  text-decoration: none;
+  border: 2px solid white;
+  color: white;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  padding: 12px 60px;
+  max-width: 219px;
+  width: 100%;
+}
+.button-div a:hover {
+  font-family: poppins;
+  text-decoration: underline;
+  border: 1px solid white;
+  color: white;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  padding: 12px 60px;
+  max-width: 219px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.modal-form-con{
+  display: flex;
+  justify-content: center;
+}
+.reset{
+  padding: 0 !important;
+}
+button:focus,input:focus{
+  outline: none;
+}
+#error-message {
+  font-size: 14px;
+}
+
+.hide{
+  display: none !important;
+}

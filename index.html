@@ -1,0 +1,149 @@
+<html>
+<head>
+    <title>Openpay - Buy now, Pay Smarter coming soon to the UK</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" type="image/png" href="./assets/favicon.png"/>
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,600" rel="stylesheet">
+	<link rel="stylesheet" href="./css/ukLanding.css" />
+ 
+</head>
+<body>
+    <div id="bg">
+ <img src="./assets/ukFlag.png" alt="">
+
+</div>
+
+<div id="lockup">
+<img src="./assets/lockup_HorizontalWhite_Wedge.svg">
+
+<div id="container">
+
+	<h1>Coming soon.</h1>
+	
+	<p>To be kept up to date with Openpay UK, please enter your details below:</p>
+
+<div>
+		
+			
+			<div class="modal-form-con">
+				<div class="modal-form">
+					<input type="text" name="fullname" id="fullname" placeholder="* Full name">
+					<input type="text" name="company" id="company" placeholder="* Company name">
+					<input type="text" name="email" id="email" placeholder="* Email address">
+					<input type="number" name="phone" id="phone" placeholder="* Phone number">
+					<input type="text" name="country" id="country" placeholder="* Country">
+
+
+
+					<div id="error-message"></div>
+				</div>
+			</div>
+			<div class="button-div">
+				<a href="#"  id="submit">Enter</a>
+			</div>
+	</div>
+
+</div>
+
+<div id="success"></div>
+
+	</div>	
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+		// https://medium.com/@dmccoy/how-to-submit-an-html-form-to-google-sheets-without-google-forms-b833952cc175
+		
+		const info ={}
+		const url = 'https://script.google.com/macros/s/AKfycbx3XbcqRhSDOM-TWaa-W_LFuVTaHU9na6HhYOfR/exec'
+
+		const checkVerification = () => {
+			// window.localStorage.clear()
+			console.log(window.localStorage.getItem('verified'))
+			if(window.localStorage.getItem('verified') === 'true'){
+				$('#modal-overlay').addClass('hide')
+			}
+			else{
+				$('#modal-overlay').removeClass('hide')
+			}
+		}
+		checkVerification()
+
+		$('input').on('input',function(){
+			checkInfo()
+		})
+
+		const verifyEmailFormat = (email) => {
+	        var re = /^(([^<>()\[\]\\.,:\s@']+(\.[^<>()\[\]\\.,:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+	        console.log('RE',re.test(String(email).toLowerCase()))
+	        return re.test(String(email).toLowerCase())
+    	}
+
+    	const checkEmail = () => {
+    		if(verifyEmailFormat($('#email').val()) === false){
+				$('#submit').attr("disabled", "disabled")
+				$('#submit').addClass('disabled')
+				$('#error-message').html('Invalid email')
+			}
+			else{
+				$('#submit').removeClass('disabled')
+				$('#submit').removeAttr("disabled")
+				$('#error-message').html('')
+			}
+    	}
+
+		const checkInfo = () =>{
+			if($('#fullname').val() === '' || $('#email').val() === '' || $('#company').val() === '' || $('#phone').val() === '' || $('#country').val() === ''){
+				$('#submit').attr("disabled", "disabled")
+				$('#submit').addClass('disabled')
+				$('#error-message').html('All fields are required')
+			}
+			else{
+				checkEmail()
+			}
+		}
+		
+		checkInfo()
+
+
+
+		sendInfo = (info) => {
+			// e.preventDefault();
+			console.log(info)
+			$.ajax({
+			    url: url,
+			    method: "GET",
+			    dataType: "json",
+			    data: info,
+				success:(response) => { 
+				  	console.log('Success',response)
+				  	$('#success').html('Thank you, we will be in touch!')
+				  	$('#container').addClass('hide')
+				  	window.localStorage.setItem('verified','true')
+				},
+				error: (err) => {
+		  			console.log('Error',err)
+		  		}
+			})
+		}
+
+		$('#submit').on('click',function(){
+			info.fullname = $('#fullname').val()
+			info.company = $('#company').val()
+			info.email = $('#email').val()
+			info.phone = $('#phone').val()
+			info.country = $('#country').val()
+			console.log(info)
+			sendInfo(info)
+		})
+
+		
+	})
+	</script>
+
+
+
+				
+</body>
+</html>
